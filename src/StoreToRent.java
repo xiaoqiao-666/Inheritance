@@ -14,7 +14,10 @@ public class StoreToRent {
     private String minimumLeasePeriod;
     private String floorNumber;
     private boolean available;
-
+    private final double INTEREST_RATE = 0.25;
+    private boolean loanRequired;
+    private double loanAmount;
+    private int loanPaymentTerm;
     public String getStoreName() {
         return storeName;
     }
@@ -45,6 +48,21 @@ public class StoreToRent {
 
     public boolean isAvailable() {
         return available;
+    }
+    public double getINTEREST_RATE() {
+        return INTEREST_RATE;
+    }
+
+    public boolean isLoanRequired() {
+        return loanRequired;
+    }
+
+    public double getLoanAmount() {
+        return loanAmount;
+    }
+
+    public int getLoanPaymentTerm() {
+        return loanPaymentTerm;
     }
 
     public void setStoreName(String storeName) {
@@ -77,6 +95,17 @@ public class StoreToRent {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+    public StoreToRent(boolean loanRequired, double loanAmount, int loanPaymentTerm) {
+        this.loanRequired = loanRequired;
+        this.loanAmount = loanAmount;
+        this.loanPaymentTerm = loanPaymentTerm;
+    }
+    public double calculateLoanFinancing() {
+        if (this.loanRequired) {
+            return (this.loanAmount * (1 + this.INTEREST_RATE)) / this.loanPaymentTerm;
+        }
+        return 0.0;
     }
 
     public void enterStoreDetails(){
